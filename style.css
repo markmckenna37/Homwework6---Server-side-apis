@@ -1,0 +1,41 @@
+/* body {
+    display: block
+}
+.container {
+
+    height: 700px;
+    border: 1px solid black;
+}
+div {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+.card {
+    margin: 10px;
+}
+.row {
+    border: 1px solid red;
+}
+.col-md-9, .col-md-3 {
+    border: 1px solid green;
+}
+header {
+    text-align: center;
+} */
+
+.container {
+    border: 1px solid black;
+}
+.searchForm {
+    border: 1px solid green;
+}
+.weatherContent {
+    border: 1px solid blue;
+}
+.weatherSections {
+    border: 1px solid red;
+}
+.card {
+    margin: 10px 5px 10px 5px;
+}
