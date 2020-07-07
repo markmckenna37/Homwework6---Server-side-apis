@@ -20,6 +20,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
     </script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script type="text/javascript" src="script.js"></script>
 </head>
 
@@ -28,76 +29,103 @@
 
     <div class="header">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Excepturi ipsa illo repellat esse iure
         veritatis quis iusto voluptatibus neque nihil, hic sit
+<!-- 
+
+        <div class="container row">
+            <div class="col-md-3">
+
+            </div>
+
+            <div class="col-md-9">
+
+            
+            </div>
+
+
+
+
+
+        </div>
+
+ -->
+
+
+
+
 
 
     <div class="container">
         <div class="row">
             <div class="col-md-3 searchForm">
-                <h1>search bar</h1>
-                <p>Lorem, ipsum.</p>
-                <p>Lorem, ipsum.</p>
-                <p>Lorem, ipsum.</p>
-                <p>Lorem, ipsum.</p>
-                <p>Lorem, ipsum.</p>
-                <p>Lorem, ipsum.</p>
-                <p>Lorem, ipsum.</p>
-                <p>Lorem, ipsum.</p>
-                <p>Lorem, ipsum.</p>
-                <p>Lorem, ipsum.</p>
-                <p>Lorem, ipsum.</p>
-                <p>Lorem, ipsum.</p>
-                <p>Lorem, ipsum.</p>
+                <h3>Search for a city</h3>
+                <form class="form-inline">
+                    <div class="form-group mb-2">
+                    </div>
+
+                      <input type="text" class="form-control" id="userCity" placeholder="Search a city">
+                    <button type="submit" class="btn btn-primary mb-2" id="submitCity">Co</button>
+                  </form>
+                  <button type="button" class="btn btn-secondary btn-lg btn-block" disabled>Button</button>
+                  <button type="button" class="btn btn-secondary btn-lg btn-block" disabled>Button</button>
+                  <button type="button" class="btn btn-secondary btn-lg btn-block" disabled>Button</button>
+                  <button type="button" class="btn btn-secondary btn-lg btn-block" disabled>Button</button>
+                  <button type="button" class="btn btn-secondary btn-lg btn-block" disabled>Button</button>
+                  <button type="button" class="btn btn-secondary btn-lg btn-block" disabled>Button</button>
             </div>
             <div class="col-md-9 weatherContent">
-                <div class="row weatherContent">
+                <div class="row location-date">
                     <h2>Heading and date</h2>
                 </div>
-                <div class="row weatherContent">
+                <div class="row temperature">
                     <h5>Lorem, ipsum.</h5>
                 </div>
-                <div class="row weatherContent">
+                <div class="row ">
                     <h5>Lorem, ipsum.</h5>
                 </div>
-                <div class="row weatherContent">
+                <div class="row windspeed">
+                    <h5>Lorem, ipsum.</h5>
+                </div>
+                <div class="row uvIndex">
                     <h5>Lorem, ipsum.</h5>
                 </div>
                 <div class="row">
  
-                    <div class="row">Lorem, ipsum dolor.</div>
                     <div class="row">
+                        <h3>5 day forecast</h3></div>
+                    <div class="row card-row">
                         <div class=" col card text-white bg-primary">
                             <div class="card-body">
-                                <h5 class="card-title">Primary card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                    of the card's content.</p>
+                                <h6 class="fDate0"></h6>
+                                <p class="fTemp0">Temp </p>
+                                <p class="fHumid0">Humidity</p>
                             </div>
                         </div>
                         <div class=" col card text-white bg-primary ">
                             <div class="card-body">
-                                <h5 class="card-title">Primary card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                    of the card's content.</p>
+                                <h6 class="fDate1"></h6>
+                                <p class="fTemp1">Temp </p>
+                                <p class="fHumid1">Humidity</p>
                             </div>
                         </div>
                         <div class=" col card text-white bg-primary ">
                             <div class="card-body">
-                                <h5 class="card-title">Primary card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                    of the card's content.</p>
+                                <h6 class="fDate2"></h6>
+                                <p class="fTemp2">Temp</p>
+                                <p class="fHumid2">Humidity</p>
                             </div>
                         </div>
                         <div class=" col card text-white bg-primary ">
                             <div class="card-body">
-                                <h5 class="card-title">Primary card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                    of the card's content.</p>
+                                <h6 class="fDate3"></h6>
+                                <p class="fTemp3">Temp</p>
+                                <p class="fHumid3">Humidity</p>
                             </div>
                         </div>
                         <div class=" col card text-white bg-primary">
                             <div class="card-body">
-                                <h5 class="card-title">Primary card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                    of the card's content.</p>
+                                <h6 class="fDate4"></h6>
+                                <p class="fTemp4">Temp</p>
+                                <p class="fHumid4">Humidity</p>
                             </div>
                         </div>
                     </div>
@@ -107,7 +135,7 @@
         </div>
         </div>
 
-    </div>
+    </div> -->
         <!-- <div class="row">
             <section class="col-md-3">
                 <p>Lorem, ipsum dolor.</p>
@@ -164,7 +192,7 @@
                     </div>
                 </div>
             </article>
-        </div> -->
+        </div>
 
 </body>
 
