@@ -1,63 +1,93 @@
-$(document).ready(function() {
-
-    function getCityWeather() {
-        event.preventDefault()
-    var userCity = $("#userCity").val()
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + userCity + "&appid=eb996df505ee640221603df760c80d82"
-    console.log(queryURL)
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).then(function(response) {
-        console.log(response)
-      });
-
+$(document).ready(function () {
+    var cities = ["Denver"]
+    var today = moment().format('l');
+    
+    function getWeather() {
+        var city = $(this).attr("data-name");
+        event.preventDefault();
+        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=eb996df505ee640221603df760c80d82&units=imperial"
+    
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function(response) {
+            var wrapperDiv = $("<div class='wrapper'>");
+            var weatherHead = $("<h2>").text(city + " (" + today + ")")
+            var temp = $("<p>").text("Temperature: " + response.main.temp + "°F")
+            var humid = $("<p>").text("Humidity: " + response.main.humidity + "%")
+            var windSpeed = $("<p>").text("Wind Speed: " + response.wind.speed + " MPH")
+            getUVI();
+            function getUVI() {
+                var lat = response.coord.lat
+                var lon = response.coord.lon
+                var UVURL = `http://api.openweathermap.org/data/2.5/uvi?appid=eb996df505ee640221603df760c80d82&lat=${lat}&lon=${lon}`
+                $.ajax({
+                    url: UVURL,
+                    method: "GET"
+                }).then(function(UV) {
+                    var UVI = "UV Index: " + UV.value
+                    wrapperDiv.append(weatherHead, temp, humid, windSpeed, UVI)
+                    $(".currentWeather").append(wrapperDiv)
+                    getForecastWeather();
+                    function getForecastWeather() {
+                        var fUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=eb996df505ee640221603df760c80d82&units=imperial`
+                        $.ajax({
+                            url: fUrl,
+                            method: "GET"
+                        }).then(function(forecast) {
+                            console.log(forecast)
+                            var WrapperDiv = $("<div class='wrapper'>");
+                        })
+                    }
+                })
+            }
+        })
     }
-// location/new Date() checkout MDN date object, on location-date
-var today = moment().format('l');
-console.log(today);
-
-
-
-    for (var i = 0; i < 5; i++ ) {
-    var fToday = moment().add(i + 1, 'days').format('l')
-        $(".fDate" + i).text(fToday)
+    
+    function getCurrentWeather() {
+        
     }
-
-// openweathermap.org/api (try to fiugre out how to make it in units imperial)
-// .temperature
-// .humidity
-// .windspeed
-// .uvIndex
-// localstorage for the cities on the left sidebar
-    // clickable dynamic elements (buttons in this case), this is very similar to activiity 10 unit 6
- //   Forecast Dates, temperature, and humidity for the next 5 days with  .fDatei, .fTempi, and .fHumidi
-
-
-
-
-
-
-
-$("#submitCity").on("click", function() {
-    getCityWeather()
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-})
+    
+    function renderButtons() {
+    $(".cityList").empty();
+    for (var i = 0; i < cities.length; i++) {
+        var a = $("<button>");
+        a.addClass("btn btn-secondary btn-sm btn-block");
+        a.attr("data-name", cities[i]);
+        a.text(cities[i]);
+        $(".cityList").append(a);
+    }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    $(document).on("click", ".btn", getWeather);
+    renderButtons();
+    
+    
+    });
