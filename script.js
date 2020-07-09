@@ -1,5 +1,6 @@
 $(document).ready(function () {
     var cities = []
+    var currentCity = cities[length - 1]
     var today = moment().format('l');
     var wrapperDiv = $("<div class='wrapper'>")
 
@@ -20,7 +21,8 @@ $(document).ready(function () {
             var temp = $("<p>").text("Temperature: " + response.main.temp + "°F")
             var humid = $("<p>").text("Humidity: " + response.main.humidity + "%")
             var windSpeed = $("<p>").text("Wind Speed: " + response.wind.speed + " MPH")
-            wrapperDiv.append(weatherHead, icon, temp, humid, windSpeed)
+            var UVtext = $("<p>").text("UV Index: ")
+            wrapperDiv.append(weatherHead, icon, temp, humid, windSpeed, UVtext)
             getUVI(response);
 
         })
@@ -34,8 +36,23 @@ $(document).ready(function () {
             url: UVURL,
             method: "GET"
         }).then(function (UV) {
-            var UVI = "UV Index: " + UV.value
-            wrapperDiv.append(UVI)
+            var UVI = UV.value;
+            var UVColor;
+            if (UVI <= 5) {
+                UVColor = "badge badge-pill badge-primary"
+            }
+            else if ((UVI > 5) && (UVI < 8)) {
+                UVColor = "badge badge-pill badge-success"
+            }
+            else if ((UVI > 7) && (UVI < 9)) {
+                UVColor = "badge badge-pill badge-warning"
+            }
+            else {
+                UVColor = "badge badge-pill badge-danger"
+            }
+            var UVElement = $("<span class='" + UVColor + "'>")
+            UVElement.text(UVI)
+            wrapperDiv.append(UVElement)
             $(".currentWeather").append(wrapperDiv)
             getForecastWeather(response);
 
@@ -82,14 +99,14 @@ $(document).ready(function () {
 
 function storeCity() {
     var newCity = $(".cityInput").val()
-    if (newCity === "") {
+    if ((newCity === "") || (cities.length == 10)){
        return false
     }
     else {
     cities.push(newCity)
     localStorage.setItem("CityList", JSON.stringify(cities))
+    getWeather();
     renderButtons();
-
     }
 }
 

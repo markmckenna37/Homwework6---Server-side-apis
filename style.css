@@ -1,41 +1,4 @@
-/* body {
-    display: block
-}
-.container {
 
-    height: 700px;
-    border: 1px solid black;
-}
-div {
-    display: block;
-    height: 100%;
-    width: 100%;
-}
-.card {
-    margin: 10px;
-}
-.row {
-    border: 1px solid red;
-}
-.col-md-9, .col-md-3 {
-    border: 1px solid green;
-}
-header {
-    text-align: center;
-} */
-
-.container {
-    border: 1px solid black;
-}
-.searchForm {
-    border: 1px solid green;
-}
-.weatherContent {
-    border: 1px solid blue;
-}
-.weatherSections {
-    border: 1px solid red;
-}
 .forecastWeather {
     display: flex;
     flex-direction: row;
@@ -45,5 +8,27 @@ header {
     margin: 10px;
 }
 .container {
-    height: 700px;
+    height: 650px;
+}
+header {
+    height: 50px;
+    text-align: center;
+    font-size: xx-large;
+    color: whitesmoke;
+    margin: 0 -15px 0 -15px;
+}
+input {
+    margin-bottom: 10px;
+}
+.cityBtn {
+    text-align: left;
+    font-size: large;
+}
+.currentWeather {
+    border: 1px solid lightgray;
+    margin-right: 10px;
+    background: white;
+}
+span {
+    margin: -30px 0 20px 0; 
 }
