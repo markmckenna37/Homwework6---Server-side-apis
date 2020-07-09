@@ -3,14 +3,21 @@ $(document).ready(function () {
     //setting global variables, an empty cities array, today's hour, and a wrapper div for my weather text
     var cities = []
     var today = moment().format('l');
+    var newCityProper;
     
     //function for getting the current time weather
-    function getWeather() {
+    function getWeather(newCityProper) {
+        var city;
         //variable that gets a city name from the click value of a rendered button
-        var city = $(this).attr("data-name");
+        if  (newCityProper !== "") {
+            city = cities[cities.length - 1]
+    }
+        else {
+            city = $(this).attr("data-name");
+             }
+        console.log(city)
             $(".currentWeather").empty()
             var wrapperDiv = $("<div class='wrapper'>")
-        event.preventDefault();
         //query URL for current weather
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=eb996df505ee640221603df760c80d82&units=imperial"
         //ajax function
@@ -129,7 +136,7 @@ function storeCity() {
     newCityProper = newCity.charAt(0).toUpperCase() + newCity.slice(1)
     cities.push(newCityProper)
     localStorage.setItem("CityList", JSON.stringify(cities))
-    getWeather();
+    getWeather(newCityProper);
     renderButtons();
     }
 }
@@ -144,8 +151,8 @@ cities = JSON.parse(localStorage.getItem("CityList")) || [];
 
 //calling functions with click events
 
-$(document).on("click",".cityBtn" , getWeather);
-$(document).on("click","#searchBtn" , storeCity);
+$(document).on("click",".btn", getWeather);
+$(document).on("click","#searchBtn", storeCity);
 $(document).on('keypress',function(e) {
     if(e.which == 13) {
         storeCity()
