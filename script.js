@@ -3,12 +3,13 @@ $(document).ready(function () {
     //setting global variables, an empty cities array, today's hour, and a wrapper div for my weather text
     var cities = []
     var today = moment().format('l');
-    var wrapperDiv = $("<div class='wrapper'>")
-
+    
     //function for getting the current time weather
     function getWeather() {
         //variable that gets a city name from the click value of a rendered button
         var city = $(this).attr("data-name");
+            $(".currentWeather").empty()
+            var wrapperDiv = $("<div class='wrapper'>")
         event.preventDefault();
         //query URL for current weather
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=eb996df505ee640221603df760c80d82&units=imperial"
@@ -28,6 +29,7 @@ $(document).ready(function () {
             // appending all of my weather variables to the wrapperDiv
             wrapperDiv.append(weatherHead, icon, temp, humid, windSpeed, UVtext)
             // calling my function to get UV index with the response parameter
+            $(".currentWeather").append(wrapperDiv)
             getUVI(response);
 
         })
@@ -35,6 +37,7 @@ $(document).ready(function () {
         //function for getting UV index with a different querey URL
     function getUVI(response) {
         //setting variables for lat and lon
+        var wrapperDiv = $("<div class='wrapper'>")
         var lat = response.coord.lat
         var lon = response.coord.lon
         var UVURL = `http://api.openweathermap.org/data/2.5/uvi?appid=eb996df505ee640221603df760c80d82&lat=${lat}&lon=${lon}`
@@ -86,6 +89,7 @@ $(document).ready(function () {
             // a for loop to create 5 elements for the 5 next days of weather forecast
             for (var i = 0; i < 5; i++) {
                 //getting forecast icons
+                console.log(forecast)
                 var currentIcon = forecast.daily[i + 1].weather[0].icon
                 var icon = $(`<img src="http://openweathermap.org/img/wn/${currentIcon}.png">`)
                 //making a variable for forecast card and all of the accompanying text
@@ -122,7 +126,8 @@ function storeCity() {
     }
     //pushing new city to our array, setting to local storage, and calling the get weather and render buttons functions
     else {
-    cities.push(newCity)
+    newCityProper = newCity.charAt(0).toUpperCase() + newCity.slice(1)
+    cities.push(newCityProper)
     localStorage.setItem("CityList", JSON.stringify(cities))
     getWeather();
     renderButtons();
@@ -141,6 +146,11 @@ cities = JSON.parse(localStorage.getItem("CityList")) || [];
 
 $(document).on("click",".cityBtn" , getWeather);
 $(document).on("click","#searchBtn" , storeCity);
+$(document).on('keypress',function(e) {
+    if(e.which == 13) {
+        storeCity()
+    }
+});
 renderButtons();
 
 
