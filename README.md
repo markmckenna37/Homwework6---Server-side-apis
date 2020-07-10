@@ -1,9 +1,9 @@
 # Homwework6---Server-side-apis
 ![](Assets/h06screenshot.png)
 
-GitHub link: https://github.com/markmckenna37/Homwework6---Server-side-apis
+GitHub link: https://github.com/markmckenna37/Weather-Dashboard---Serverside-API
 
-Live GitHub link: https://markmckenna37.github.io/Homwework6---Server-side-apis/ 
+Live GitHub link: https://markmckenna37.github.io/Weather-Dashboard---Serverside-API/
 
 For this homework assignment, we were tasked with making a fully functional weather dashboard app where the user searches for a city, and the app provides a date, temperature, humidity, uv index, and wind speed for both the current day, and a 5 day forecast. The app also keeps a list of your previously searched cities in a local storage file. The data for the app is accessed through the Open Weather Map API. Jquery, bootstrap, and moment.js were also used for styling query selectors, and time data.
 
