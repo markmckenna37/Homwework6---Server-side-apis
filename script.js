@@ -20,7 +20,7 @@ $(document).ready(function () {
             //making text and img variables for weather data and icons
             var weatherHead = $("<h2>").text(city + " (" + today + ")")
             var currentIcon = response.weather[0].icon
-            var icon = $(`<img src="http://openweathermap.org/img/wn/${currentIcon}@2x.png">`)
+            var icon = $(`<img src="https://openweathermap.org/img/wn/${currentIcon}@2x.png">`)
             var temp = $("<p>").text("Temperature: " + response.main.temp + "°F")
             var humid = $("<p>").text("Humidity: " + response.main.humidity + "%")
             var windSpeed = $("<p>").text("Wind Speed: " + response.wind.speed + " MPH")
@@ -36,7 +36,7 @@ $(document).ready(function () {
         //setting variables for lat and lon
         var lat = response.coord.lat
         var lon = response.coord.lon
-        var UVURL = `http://api.openweathermap.org/data/2.5/uvi?appid=eb996df505ee640221603df760c80d82&lat=${lat}&lon=${lon}`
+        var UVURL = `https://api.openweathermap.org/data/2.5/uvi?appid=eb996df505ee640221603df760c80d82&lat=${lat}&lon=${lon}`
         //calling ajax function for UV index
         $.ajax({
             url: UVURL,
@@ -86,7 +86,7 @@ $(document).ready(function () {
             for (var i = 0; i < 5; i++) {
                 //getting forecast icons
                 var currentIcon = forecast.daily[i + 1].weather[0].icon
-                var icon = $(`<img src="http://openweathermap.org/img/wn/${currentIcon}.png" class="weatherIcon">`)
+                var icon = $(`<img src="https://openweathermap.org/img/wn/${currentIcon}.png" class="weatherIcon">`)
                 //making a variable for forecast card and all of the accompanying text
                 var fCard = $("<div class='card text-white bg-primary col-6 col-sm-6 col-md-4 col-lg-3'>")
                 var fDate = $("<h4>").text(moment().add(i + 1, 'days').format('l'))
