@@ -3,18 +3,11 @@ $(document).ready(function () {
     //setting global variables, an empty cities array, today's hour, and a wrapper div for my weather text
     var cities = []
     var today = moment().format('l');
-    var newCityProper;
     
     //function for getting the current time weather
-    function getWeather(newCityProper) {
-        var city;
+    function getWeather() {
         //variable that gets a city name from the click value of a rendered button
-        if  (newCityProper !== "") {
-            city = cities[cities.length - 1]
-    }
-        else {
-            city = $(this).attr("data-name");
-             }
+            var city = $(this).attr("data-name") ||  cities[cities.length - 1]
         console.log(city)
             $(".currentWeather").empty()
             var wrapperDiv = $("<div class='wrapper'>")
@@ -98,7 +91,7 @@ $(document).ready(function () {
                 //getting forecast icons
                 console.log(forecast)
                 var currentIcon = forecast.daily[i + 1].weather[0].icon
-                var icon = $(`<img src="http://openweathermap.org/img/wn/${currentIcon}.png">`)
+                var icon = $(`<img src="http://openweathermap.org/img/wn/${currentIcon}.png" class="weatherIcon">`)
                 //making a variable for forecast card and all of the accompanying text
                 var fCard = $("<div class='card text-white bg-primary'>")
                 var fDate = $("<h4>").text(moment().add(i + 1, 'days').format('l'))
@@ -118,7 +111,7 @@ $(document).ready(function () {
         //for loop to render buttons for all of the cities in our cities array
         for (var i = 0; i < cities.length; i++) {
             var a = $("<button>");
-            a.addClass("btn btn-secondary btn-sm btn-block cityBtn");
+            a.addClass("btn btn-sm btn-block cityBtn cityBtn" + i + "");
             a.attr("data-name", cities[i]);
             a.text(cities[i]);
             $(".cityList").append(a);
@@ -128,17 +121,12 @@ $(document).ready(function () {
     //function for storing a new city in local storage. made an if statement to prevent a blank search
 function storeCity() {
     var newCity = $(".cityInput").val()
-    if ((newCity === "") || (cities.length == 10)){
-       return false
-    }
     //pushing new city to our array, setting to local storage, and calling the get weather and render buttons functions
-    else {
     newCityProper = newCity.charAt(0).toUpperCase() + newCity.slice(1)
     cities.push(newCityProper)
     localStorage.setItem("CityList", JSON.stringify(cities))
     getWeather(newCityProper);
     renderButtons();
-    }
 }
 
 //setting our cities array to our local storage key
@@ -151,8 +139,9 @@ cities = JSON.parse(localStorage.getItem("CityList")) || [];
 
 //calling functions with click events
 
-$(document).on("click",".btn", getWeather);
+$(document).on("click",".cityBtn", getWeather);
 $(document).on("click","#searchBtn", storeCity);
+
 $(document).on('keypress',function(e) {
     if(e.which == 13) {
         storeCity()

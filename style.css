@@ -6,6 +6,8 @@
 .card {
     padding: 10px;
     margin: 10px;
+    width: 350px;
+    height: auto;
     box-shadow: 5px 5px #888888;
 }
 .container {
@@ -24,6 +26,8 @@ input {
 .cityBtn {
     text-align: left;
     font-size: large;
+    background: white;
+    margin-bottom: 1px
 }
 .currentWeather {
     border: 1px solid lightgray;
@@ -36,4 +40,7 @@ span {
 }
 p {
     font-size: larger;
+}
+.weatherIcon {
+    width: 50px;
 }
