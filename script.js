@@ -8,7 +8,6 @@ $(document).ready(function () {
     function getWeather() {
         //variable that gets a city name from the click value of a rendered button
             var city = $(this).attr("data-name") ||  cities[cities.length - 1]
-        console.log(city)
             $(".currentWeather").empty()
             var wrapperDiv = $("<div class='wrapper'>")
         //query URL for current weather
@@ -25,19 +24,16 @@ $(document).ready(function () {
             var temp = $("<p>").text("Temperature: " + response.main.temp + "°F")
             var humid = $("<p>").text("Humidity: " + response.main.humidity + "%")
             var windSpeed = $("<p>").text("Wind Speed: " + response.wind.speed + " MPH")
-            var UVtext = $("<p>").text("UV Index: ")
             // appending all of my weather variables to the wrapperDiv
-            wrapperDiv.append(weatherHead, icon, temp, humid, windSpeed, UVtext)
+            wrapperDiv.append(weatherHead, icon, temp, humid, windSpeed)
             // calling my function to get UV index with the response parameter
-            $(".currentWeather").append(wrapperDiv)
-            getUVI(response);
+            getUVI(response, wrapperDiv);
 
         })
     }
         //function for getting UV index with a different querey URL
-    function getUVI(response) {
+    function getUVI(response, wrapperDiv) {
         //setting variables for lat and lon
-        var wrapperDiv = $("<div class='wrapper'>")
         var lat = response.coord.lat
         var lon = response.coord.lon
         var UVURL = `http://api.openweathermap.org/data/2.5/uvi?appid=eb996df505ee640221603df760c80d82&lat=${lat}&lon=${lon}`
@@ -57,19 +53,19 @@ $(document).ready(function () {
             }
             else if ((UVI > 7) && (UVI < 9)) {
                 UVColor = "badge badge-pill badge-warning"
-            }
+            } 
             else {
                 UVColor = "badge badge-pill badge-danger"
             }
             // making an element for UVI color
-            var UVElement = $("<span class='" + UVColor + "'>")
-            UVElement.text(UVI)
+            var UVElement = $("<p> UV Index: <span class='" + UVColor + "'>" + UVI + "</span></p>")
+            console.log(UVElement)
             // appending UV Element to wrapper wrapperDiv, appending the wrapper div to current weather
             wrapperDiv.append(UVElement)
             $(".currentWeather").append(wrapperDiv)
             //calling function to get forecast with response as a parameter
             getForecastWeather(response);
-
+            console.log(wrapperDiv)
 
         })
     }
@@ -89,11 +85,10 @@ $(document).ready(function () {
             // a for loop to create 5 elements for the 5 next days of weather forecast
             for (var i = 0; i < 5; i++) {
                 //getting forecast icons
-                console.log(forecast)
                 var currentIcon = forecast.daily[i + 1].weather[0].icon
                 var icon = $(`<img src="http://openweathermap.org/img/wn/${currentIcon}.png" class="weatherIcon">`)
                 //making a variable for forecast card and all of the accompanying text
-                var fCard = $("<div class='card text-white bg-primary'>")
+                var fCard = $("<div class='card text-white bg-primary col-6 col-sm-6 col-md-4 col-lg-3'>")
                 var fDate = $("<h4>").text(moment().add(i + 1, 'days').format('l'))
                 var fTemp = $("<p>").text("Temperature: " + forecast.daily[i + 1].temp.day + "°F")
                 var fHumid = $("<p>").text("Humidity: " + forecast.daily[i + 1].humidity + "%")

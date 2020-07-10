@@ -2,13 +2,14 @@
 .forecastWeather {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 .card {
     padding: 10px;
     margin: 10px;
-    width: 350px;
     height: auto;
     box-shadow: 5px 5px #888888;
+    max-width: 145px;
 }
 .container {
     height: auto;
@@ -43,4 +44,7 @@ p {
 }
 .weatherIcon {
     width: 50px;
+}
+h4 {
+    margin-top: 10px;
 }
